@@ -10,6 +10,8 @@ namespace ConverterCore.Distance
     {
         Meter,
         Yard,
-        Inch
+        Inch,
+        Foot,
+        Feet
     }
 }

@@ -8,12 +8,14 @@ namespace ConverterCore.Distance
         {
             double yardRatio = 0.9144;
             double inchRatio = 0.0254;
+            double footRatio = 0.3048;
 
             double baseUnit = inputUnit switch
             {
                 DistanceUnits.Meter => amount,
                 DistanceUnits.Yard => amount * yardRatio,
                 DistanceUnits.Inch => amount * inchRatio,
+                var unit when unit == DistanceUnits.Foot || unit == DistanceUnits.Feet => amount * footRatio,
                 _ => throw new ArgumentOutOfRangeException($"Unknown distance unit - {inputUnit}"),
             };
 
@@ -22,6 +24,7 @@ namespace ConverterCore.Distance
                 DistanceUnits.Meter => baseUnit,
                 DistanceUnits.Yard => baseUnit / yardRatio,
                 DistanceUnits.Inch => baseUnit / inchRatio,
+                var unit when unit == DistanceUnits.Foot || unit == DistanceUnits.Feet => baseUnit / footRatio,
                 _ => throw new ArgumentOutOfRangeException($"Unknown distance unit - {outputUnit}"),
             };
 
